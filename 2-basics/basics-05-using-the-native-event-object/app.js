@@ -2,21 +2,41 @@ const app = Vue.createApp({
   data() {
     return {
       counter: 0,
-      name: ''
+      name: "",
+      lastname: "",
     };
   },
-  methods: {
-    setName(event, lastName) {
-      this.name = event.target.value + ' ' + lastName;
+  watch: {
+    counter(value) {
+      if (value > 50) {
+        const that = this;
+        setTimeout(function () {
+          that.counter = 0;
+        }, 2000);
+      }
     },
+    // name(value) {
+    //   if (value === "") {
+    //     this.fullname = "";
+    //   } else {
+    //     this.fullname = value + " " + "Bouffard";
+    //   }
+    // },
+  },
+  computed: {
+    fullname() {
+      return this.name + " " + this.lastname;
+    },
+  },
+  methods: {
     add(num) {
       this.counter = this.counter + num;
     },
     reduce(num) {
       this.counter = this.counter - num;
       // this.counter--;
-    }
-  }
+    },
+  },
 });
 
-app.mount('#events');
+app.mount("#events");
